@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slide Example</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .slide-wrap{
+            width: 80vw;
+            height: 30vh;
+            overflow: hidden;
+        }
+        
+        .image-container{
+            display: flex;
+            width: 300vw;
+            transition: transform 0.5s;
+        }
+
+        .image-container > li{
+            justify-content: space-around;
+            list-style: none;
+        }
+
+        .image-container > li > img{
+            margin: 1vw;
+            width: 25vw;
+            height: 30vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-wrap">
+        <ul class="image-container">
+            <li>
+                <img src="./img/1.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/2.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/3.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/4.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/5.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/6.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/7.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/8.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/9.png" alt="Not found Image">
+            </li>
+            <li>
+                <img src="./img/10.png" alt="Not found Image">
+            </li>
+        </ul>
+    </div>
+    <div>
+        <button id="backBtn">back</button>
+        <button id="forwardBtn">forward</button>
+    </div>
+
+    <script>
+        const imageCount = document.querySelectorAll('.image-container li').length
+        const showCount = 3
+        const startIndex = 0
+        const lastIndex = imageCount - showCount
+        let currentIndex = 0
+        
+        const slideVw = 27
+        let currentVw = 0
+
+        document.querySelector("#backBtn").addEventListener('click', backSlide)
+
+        document.querySelector("#forwardBtn").addEventListener('click', forwardSlide)
+
+        function backSlide(){
+            if(currentIndex === startIndex) return
+            currentIndex--
+            document.querySelector('.image-container').style.transform = `translate(${moveSlide('back')})`
+        }
+
+        function forwardSlide(){
+            if(currentIndex === lastIndex) return
+            currentIndex++
+            document.querySelector('.image-container').style.transform = `translate(${moveSlide('forward')})`;
+        }
+
+        function moveSlide(direction){
+            if(direction === 'back') {
+                currentVw += slideVw
+            }else {
+                currentVw -= slideVw
+            }
+            return currentVw + 'vw'
+        }
+    </script>
+</body>
+</html>
